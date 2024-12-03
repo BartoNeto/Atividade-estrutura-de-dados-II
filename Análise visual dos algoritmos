@@ -1,0 +1,86 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Função para mostrar o gráfico de ordenação
+def mostrar_grafico(lista, algoritmo, etapa):
+    plt.figure(figsize=(10, 6))
+    plt.bar(range(len(lista)), lista, color='skyblue')
+    plt.title(f'{algoritmo} - Etapa {etapa}')
+    plt.xlabel('Índice')
+    plt.ylabel('Valor')
+    plt.show()
+
+# Função para Merge Sort (visualização por etapas)
+def merge_sort_visual(lista, etapa=1):
+    if len(lista) > 1:
+        meio = len(lista) // 2
+        esquerda = lista[:meio]
+        direita = lista[meio:]
+        
+        merge_sort_visual(esquerda, etapa)
+        merge_sort_visual(direita, etapa)
+
+        i = j = k = 0
+        while i < len(esquerda) and j < len(direita):
+            if esquerda[i] < direita[j]:
+                lista[k] = esquerda[i]
+                i += 1
+            else:
+                lista[k] = direita[j]
+                j += 1
+            k += 1
+
+        while i < len(esquerda):
+            lista[k] = esquerda[i]
+            i += 1
+            k += 1
+
+        while j < len(direita):
+            lista[k] = direita[j]
+            j += 1
+            k += 1
+
+        mostrar_grafico(lista, 'Merge Sort', etapa)
+        etapa += 1
+
+# Função para Quick Sort (visualização por etapas)
+def quick_sort_visual(lista, low, high, etapa=1):
+    if low < high:
+        pi = partition(lista, low, high)
+        quick_sort_visual(lista, low, pi-1, etapa+1)
+        quick_sort_visual(lista, pi+1, high, etapa+1)
+
+        mostrar_grafico(lista, 'Quick Sort', etapa)
+
+def partition(lista, low, high):
+    i = low - 1
+    pivô = lista[high]
+    for j in range(low, high):
+        if lista[j] <= pivô:
+            i += 1
+            lista[i], lista[j] = lista[j], lista[i]
+    lista[i + 1], lista[high] = lista[high], lista[i + 1]
+    return i + 1
+
+# Função para Selection Sort (visualização por etapas)
+def selection_sort_visual(lista):
+    n = len(lista)
+    for i in range(n):
+        minimo = i
+        for j in range(i+1, n):
+            if lista[j] < lista[minimo]:
+                minimo = j
+        lista[i], lista[minimo] = lista[minimo], lista[i]
+        mostrar_grafico(lista, 'Selection Sort', i+1)
+
+# Gerar lista aleatória para os testes
+lista = [64, 34, 25, 12, 22, 11, 90]
+
+# Visualizar Merge Sort
+# merge_sort_visual(lista.copy())
+
+# Visualizar Quick Sort
+# quick_sort_visual(lista.copy(), 0, len(lista)-1)
+
+# Visualizar Selection Sort
+selection_sort_visual(lista.copy())
