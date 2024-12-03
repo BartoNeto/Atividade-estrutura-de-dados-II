@@ -1,0 +1,11 @@
+Conceito de "Dividir para Conquistar"
+
+O Merge Sort utiliza o conceito de "dividir para conquistar", que funciona da seguinte forma:
+
+1. Divisão: A lista é repetidamente dividida ao meio até que tenhamos sublistas com apenas um elemento, que por definição já estão ordenadas.
+
+
+2. Conquista: As sublistas são ordenadas, e o algoritmo começa a combinar essas sublistas de forma ordenada.
+
+
+3. Combinação: As sublistas ordenadas são então combinadas para formar uma lista maior e ordenada, até que todas as sublistas sejam fundidas em uma lista completamente ordenada.
