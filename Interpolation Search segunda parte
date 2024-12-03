@@ -1,0 +1,4 @@
+Quando o Interpolation Search é mais eficiente:
+
+Listas ordenadas e com intervalos uniformes:
+Ele reduz diretamente a quantidade de comparações necessárias ao "pular" para uma posição mais próxima do alvo.
