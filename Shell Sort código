@@ -1,0 +1,105 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+// Função para trocar dois elementos
+void troca(int *a, int *b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+// Função de Shell Sort com a sequência de Shell
+void shellSortShell(int array[], int n) {
+    for (int intervalo = n / 2; intervalo > 0; intervalo /= 2) {
+        for (int i = intervalo; i < n; i++) {
+            int temp = array[i];
+            int j = i;
+            while (j >= intervalo && array[j - intervalo] > temp) {
+                array[j] = array[j - intervalo];
+                j -= intervalo;
+            }
+            array[j] = temp;
+        }
+    }
+}
+
+// Função de Shell Sort com a sequência de Knuth
+void shellSortKnuth(int array[], int n) {
+    int intervalo = 1;
+    while (intervalo < n) {
+        intervalo = intervalo * 3 + 1;
+    }
+
+    while (intervalo > 1) {
+        intervalo /= 3;
+        for (int i = intervalo; i < n; i++) {
+            int temp = array[i];
+            int j = i;
+            while (j >= intervalo && array[j - intervalo] > temp) {
+                array[j] = array[j - intervalo];
+                j -= intervalo;
+            }
+            array[j] = temp;
+        }
+    }
+}
+
+// Função de Shell Sort com a sequência de Hibbard
+void shellSortHibbard(int array[], int n) {
+    int intervalo = 1;
+    while (intervalo <= n) {
+        intervalo = 2 * intervalo + 1;
+    }
+
+    while (intervalo > 1) {
+        intervalo = (intervalo - 1) / 2;
+        for (int i = intervalo; i < n; i++) {
+            int temp = array[i];
+            int j = i;
+            while (j >= intervalo && array[j - intervalo] > temp) {
+                array[j] = array[j - intervalo];
+                j -= intervalo;
+            }
+            array[j] = temp;
+        }
+    }
+}
+
+// Função para medir o tempo de execução
+double medirTempo(void (*sort)(int[], int), int array[], int n) {
+    clock_t inicio = clock();
+    sort(array, n);
+    clock_t fim = clock();
+    return (double)(fim - inicio) / CLOCKS_PER_SEC;
+}
+
+int main() {
+    int n = 1000; // Tamanho do vetor
+    int *arrayShell = (int *)malloc(n * sizeof(int));
+    int *arrayKnuth = (int *)malloc(n * sizeof(int));
+    int *arrayHibbard = (int *)malloc(n * sizeof(int));
+
+    // Preencher o array com números aleatórios
+    for (int i = 0; i < n; i++) {
+        int num = rand() % 10000;
+        arrayShell[i] = num;
+        arrayKnuth[i] = num;
+        arrayHibbard[i] = num;
+    }
+
+    // Medir tempo de execução de cada sequência
+    double tempoShell = medirTempo(shellSortShell, arrayShell, n);
+    double tempoKnuth = medirTempo(shellSortKnuth, arrayKnuth, n);
+    double tempoHibbard = medirTempo(shellSortHibbard, arrayHibbard, n);
+
+    printf("Tempo de execução com a sequência de Shell: %f segundos\n", tempoShell);
+    printf("Tempo de execução com a sequência de Knuth: %f segundos\n", tempoKnuth);
+    printf("Tempo de execução com a sequência de Hibbard: %f segundos\n", tempoHibbard);
+
+    free(arrayShell);
+    free(arrayKnuth);
+    free(arrayHibbard);
+
+    return 0;
+}
