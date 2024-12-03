@@ -1,0 +1,34 @@
+Explique como os "baldes" são preenchidos e ordenados.
+
+1. Preenchendo os Baldes
+
+Os baldes são usados para agrupar os elementos da lista original de acordo com seus valores, para que os elementos em cada balde possam ser ordenados separadamente. Aqui está como os baldes são preenchidos:
+
+Divisão do intervalo: A ideia central do Bucket Sort é dividir o intervalo de valores da lista original em intervalos menores. Para isso, determinamos o número de baldes a serem usados, o que pode ser feito de várias formas, dependendo do intervalo de dados e do tipo de dados (inteiros ou flutuantes).
+
+Para números flutuantes no intervalo [0, 1): Dividimos o intervalo  em  baldes. Cada número  da lista é atribuído a um balde com base no cálculo . Esse índice determina em qual balde o número será colocado. Ou seja, os números mais próximos de 0 vão para o balde de índice 0, os mais próximos de 1 vão para o balde , e assim por diante.
+
+Para números inteiros: O intervalo de números inteiros também pode ser dividido em baldes com base em um intervalo fixo. Por exemplo, se os números estão no intervalo , podemos ter baldes para intervalos de 0 a 9, 10 a 19, 20 a 29, etc.
+
+
+Distribuindo os elementos nos baldes: Cada elemento da lista é então colocado em um balde específico, dependendo de seu valor. O cálculo do índice do balde é feito usando uma fórmula que depende da amplitude dos números e do número de baldes. A lista original é percorrida, e os elementos são distribuídos para os baldes de acordo com seu valor.
+
+Exemplo: Se temos uma lista de números  e 5 baldes, o primeiro número, 0.42, seria colocado no balde 4, o 0.32 no balde 3, e assim por diante.
+
+
+2. Ordenando Dentro dos Baldes
+
+Depois que os baldes estão preenchidos com os elementos da lista, cada balde precisa ser ordenado individualmente. O algoritmo de ordenação que você escolhe para ordenar os elementos dentro de cada balde pode variar, mas os dois mais comuns são:
+
+Insertion Sort: É frequentemente usado para ordenar pequenos conjuntos de dados dentro de cada balde, porque ele tem um bom desempenho quando o número de elementos em cada balde é pequeno.
+
+Quick Sort ou Merge Sort: Se os baldes forem maiores, pode-se usar algoritmos mais eficientes para grandes conjuntos de dados dentro de cada balde.
+
+
+A escolha do algoritmo depende do tamanho dos baldes e da distribuição dos dados. Para listas pequenas ou com elementos uniformemente distribuídos, o Insertion Sort pode ser eficiente.
+
+3. Concatenando os Baldes
+
+Após a ordenação dentro de cada balde, os baldes são concatenados para formar a lista final ordenada. A ordem dos baldes e os elementos ordenados dentro de cada balde determinam a ordem final da lista.
+
+A concatenação é feita simplesmente pegando os elementos de cada balde, na ordem dos baldes, e reunindo-os em uma lista final.
