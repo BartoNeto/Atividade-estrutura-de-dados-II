@@ -1,0 +1,37 @@
+Como o Exponential Search combina elementos do Jump Search e Binary Search?
+
+O Exponential Search aproveita as estratégias de dois algoritmos:
+
+1. Do Jump Search:
+
+Faz saltos exponenciais () para localizar rapidamente o intervalo onde o elemento pode estar.
+
+Isso é análogo ao conceito de "pular blocos" no Jump Search, mas aqui o tamanho do salto cresce de forma exponencial em vez de ser fixo ().
+
+
+
+2. Do Binary Search:
+
+Assim que o intervalo onde o elemento está localizado é identificado, o Exponential Search aplica o Binary Search dentro desse intervalo.
+
+Essa abordagem reduz significativamente o número de comparações, restringindo a busca em um espaço menor.
+
+
+Desempenho em Listas de Tamanhos Diferentes
+
+
+Em listas muito grandes:
+
+O crescimento exponencial localiza rapidamente o intervalo relevante:
+
+Ideal para casos em que o elemento está próximo do início.
+
+Reduz o número de comparações iniciais em comparação com o Binary Search.
+
+
+
+Em listas pequenas:
+
+O custo do crescimento exponencial pode não valer a pena, já que o Binary Search já seria muito rápido.
+
+Nesse caso, o Binary Search costuma ser mais eficiente.
