@@ -1,0 +1,75 @@
+#include <stdio.h>
+void trocar(int *a, int *b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+
+int escolherPivo(int arr[], int baixo, int alto, int escolha) {
+    if (escolha == 1) {
+        return baixo;
+    } else if (escolha == 2) {
+        return alto; 
+    } else {
+        return (baixo + alto) / 2; 
+    }
+}
+int particionar(int arr[], int baixo, int alto, int indicePivo) {
+    int pivo = arr[indicePivo];
+    trocar(&arr[indicePivo], &arr[alto]); 
+    int i = baixo - 1;
+    
+    for (int j = baixo; j < alto; j++) {
+        if (arr[j] <= pivo) {
+            i++;
+            trocar(&arr[i], &arr[j]);
+        }
+    }
+    trocar(&arr[i + 1], &arr[alto]); // Coloca o pivô na posição correta
+    return i + 1;
+}
+
+// Função principal do Quick Sort
+void quickSort(int arr[], int baixo, int alto, int escolhaPivo) {
+    if (baixo < alto) {
+        int indicePivo = escolherPivo(arr, baixo, alto, escolhaPivo);
+        int indiceNovoPivo = particionar(arr, baixo, alto, indicePivo);
+
+        quickSort(arr, baixo, indiceNovoPivo - 1, escolhaPivo);  // Ordena a parte à esquerda
+        quickSort(arr, indiceNovoPivo + 1, alto, escolhaPivo); // Ordena a parte à direita
+    }
+}
+
+// Função para imprimir a lista
+void imprimirLista(int arr[], int n) {
+    for (int i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+int main() {
+    // Testando o Quick Sort com diferentes critérios de escolha de pivô
+    int arr1[] = {10, 7, 8, 9, 1, 5};
+    int n1 = sizeof(arr1) / sizeof(arr1[0]);
+    
+    printf("Lista original:\n");
+    imprimirLista(arr1, n1);
+
+    printf("\nQuick Sort com o primeiro elemento como pivô:\n");
+    quickSort(arr1, 0, n1 - 1, 1);
+    imprimirLista(arr1, n1);
+
+    int arr2[] = {10, 7, 8, 9, 1, 5};
+    printf("\nQuick Sort com o último elemento como pivô:\n");
+    quickSort(arr2, 0, n1 - 1, 2);
+    imprimirLista(arr2, n1);
+
+    int arr3[] = {10, 7, 8, 9, 1, 5};
+    printf("\nQuick Sort com o elemento do meio como pivô:\n");
+    quickSort(arr3, 0, n1 - 1, 3);
+    imprimirLista(arr3, n1);
+
+    return 0;
+}
