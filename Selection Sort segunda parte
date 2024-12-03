@@ -1,0 +1,7 @@
+Desempenho em Listas Pequenas, Médias e Grandes
+
+Listas pequenas: O Selection Sort pode ser útil para listas pequenas, pois é simples e fácil de implementar, com um desempenho relativamente bom para listas de até algumas centenas de elementos.
+
+Listas médias: Começa a perder eficiência quando o tamanho da lista aumenta. Para listas com milhares de elementos, o Selection Sort começa a ser consideravelmente mais lento em comparação com outros algoritmos como o Merge Sort ou o Quick Sort.
+
+Listas grandes: Para listas muito grandes, o Selection Sort é geralmente impraticável devido à sua complexidade de tempo quadrática. Outros algoritmos mais eficientes, como Merge Sort ou Quick Sort, são muito mais adequados.
