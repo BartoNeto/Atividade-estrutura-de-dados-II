@@ -1,0 +1,199 @@
+Algoritmos de Busca
+
+1. Binary Search (Busca Binária)
+
+Tempo:
+
+Melhor Caso: O(1) (quando o elemento está no meio da lista).
+
+Caso Médio: O(log n).
+
+Pior Caso: O(log n) (quando o elemento não está na lista).
+
+
+Espaço:
+
+O(1) para a versão iterativa. O(log n) para a versão recursiva devido à pilha de chamadas.
+
+
+Explicação: O Binary Search reduz a metade da lista em cada iteração. Por isso, sua complexidade é logarítmica, o que o torna eficiente em listas grandes.
+
+
+
+2. Interpolation Search (Busca por Interpolação)
+
+Tempo:
+
+Melhor Caso: O(1) (quando o elemento está na posição calculada diretamente pela fórmula de interpolação).
+
+Caso Médio: O(log log n) (quando os elementos estão uniformemente distribuídos).
+
+Pior Caso: O(n) (quando os elementos estão mal distribuídos).
+
+
+Espaço:
+
+O(1).
+
+
+Explicação: A eficiência do Interpolation Search depende da distribuição dos dados. Quando os dados são uniformemente distribuídos, ele pode ser mais rápido que o Binary Search.
+
+
+
+3. Jump Search (Busca por Saltos)
+
+Tempo:
+
+Melhor Caso: O(1) (se o elemento estiver no primeiro "salto").
+
+Caso Médio: O(√n).
+
+Pior Caso: O(√n).
+
+
+Espaço:
+
+O(1).
+
+
+Explicação: O Jump Search divide a lista em blocos e faz saltos entre eles. Sua complexidade é √n, o que o torna mais rápido que a busca linear, mas menos eficiente que a busca binária.
+
+
+
+4. Exponential Search (Busca Exponencial)
+
+Tempo:
+
+Melhor Caso: O(1) (quando o elemento está na primeira posição).
+
+Caso Médio: O(log n).
+
+Pior Caso: O(log n).
+
+
+Espaço:
+
+O(1).
+
+
+Explicação: O Exponential Search combina a busca exponencial para encontrar a faixa onde o elemento está, seguido de um Binary Search. Isso o torna eficiente quando o tamanho da lista é muito grande e o valor do elemento é desconhecido.
+
+Algoritmos de Ordenação
+
+1. Selection Sort (Ordenação por Seleção)
+
+Tempo:
+
+Melhor Caso: O(n²).
+
+Caso Médio: O(n²).
+
+Pior Caso: O(n²).
+
+
+Espaço:
+
+O(1) (se for feito no lugar).
+
+
+Explicação: O Selection Sort faz repetidas comparações e trocas, o que resulta em complexidade quadrática, tornando-o ineficiente para listas grandes.
+
+
+
+2. Quick Sort (Ordenação Rápida)
+
+Tempo:
+
+Melhor Caso: O(n log n) (quando o pivô divide bem a lista).
+
+Caso Médio: O(n log n).
+
+Pior Caso: O(n²) (quando o pivô é o menor ou maior elemento da lista, resultando em uma divisão desbalanceada).
+
+
+Espaço:
+
+O(log n) para a versão recursiva.
+
+
+Explicação: O Quick Sort é muito eficiente na prática, mas seu pior caso pode ocorrer se a escolha do pivô for ruim. Em geral, ele tem uma boa performance devido à sua complexidade média de O(n log n).
+
+
+
+3. Merge Sort (Ordenação por Mesclagem)
+
+Tempo:
+
+Melhor Caso: O(n log n).
+
+Caso Médio: O(n log n).
+
+Pior Caso: O(n log n).
+
+
+Espaço:
+
+O(n) (pois requer espaço adicional para armazenar as sublistas).
+
+
+Explicação: O Merge Sort é estável e tem uma complexidade O(n log n) garantida, mas consome mais espaço devido à necessidade de arrays auxiliares.
+
+
+
+4. Shell Sort (Ordenação de Shell)
+
+Tempo:
+
+Melhor Caso: O(n log n) (com uma boa sequência de intervalos).
+
+Caso Médio: O(n^3/2) (dependendo da sequência de intervalos escolhida).
+
+Pior Caso: O(n²) (com a sequência de intervalos padrão).
+
+
+Espaço:
+
+O(1).
+
+
+Explicação: O Shell Sort melhora o Insertion Sort ao usar uma sequência de intervalos para permitir que a lista seja "dividida" de forma mais eficiente. Sua complexidade depende da sequência de intervalos, e uma boa escolha pode melhorar significativamente seu desempenho.
+
+
+
+5. Bucket Sort (Ordenação por Balde)
+
+Tempo:
+
+Melhor Caso: O(n + k), onde k é o número de baldes.
+
+Caso Médio: O(n + k).
+
+Pior Caso: O(n²) (se os baldes estiverem muito desbalanceados).
+
+
+Espaço:
+
+O(n + k) (onde k é o número de baldes).
+
+
+Explicação: O Bucket Sort é eficaz quando os dados são distribuídos uniformemente. Em listas muito desbalanceadas, no entanto, ele pode cair em um caso de pior desempenho, sendo ineficiente.
+
+
+
+6. Radix Sort (Ordenação Radix)
+
+Tempo:
+
+Melhor Caso: O(nk) (onde k é o número de dígitos).
+
+Caso Médio: O(nk).
+
+Pior Caso: O(nk).
+
+
+Espaço:
+
+O(n + k).
+
+
+Explicação: O Radix Sort é eficiente quando o número de dígitos (k) é pequeno em comparação com o número de elementos (n). Ele não depende das comparações diretas entre os elementos, o que o torna adequado para ordenar números inteiros ou strings.
