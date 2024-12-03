@@ -1,0 +1,80 @@
+#include <stdio.h>
+#include <math.h>
+#include <time.h>
+
+// Função Jump Search
+int jumpSearch(int array[], int tamanho, int alvo) {
+    int salto = sqrt(tamanho);
+    int prev = 0;
+
+    while (array[fmin(salto, tamanho) - 1] < alvo) {
+        prev = salto;
+        salto += sqrt(tamanho);
+        if (prev >= tamanho) {
+            return -1; 
+        }
+    }
+
+    for (int i = prev; i < fmin(salto, tamanho); i++) {
+        if (array[i] == alvo) {
+            return i;
+        }
+    }
+
+    return -1;
+}
+
+// Função Binary Search
+int binarySearch(int array[], int tamanho, int alvo) {
+    int esquerda = 0, direita = tamanho - 1;
+
+    while (esquerda <= direita) {
+        int meio = esquerda + (direita - esquerda) / 2;
+
+        if (array[meio] == alvo) {
+            return meio;
+        }
+        if (array[meio] < alvo) {
+            esquerda = meio + 1;
+        } else {
+            direita = meio - 1;
+        }
+    }
+    return -1;
+}
+
+// Função para medir tempo de execução
+void compararTempos(int tamanho, int alvo) {
+    int array[tamanho];
+    for (int i = 0; i < tamanho; i++) {
+        array[i] = i + 1; // Lista ordenada
+    }
+
+    // Medindo tempo do Jump Search
+    clock_t inicioJump = clock();
+    int indiceJump = jumpSearch(array, tamanho, alvo);
+    clock_t fimJump = clock();
+    double tempoJump = (double)(fimJump - inicioJump) / CLOCKS_PER_SEC;
+
+    // Medindo tempo do Binary Search
+    clock_t inicioBinary = clock();
+    int indiceBinary = binarySearch(array, tamanho, alvo);
+    clock_t fimBinary = clock();
+    double tempoBinary = (double)(fimBinary - inicioBinary) / CLOCKS_PER_SEC;
+
+    // Resultados
+    printf("=== Lista com %d elementos ===\n", tamanho);
+    printf("Jump Search: %f segundos (índice %d).\n", tempoJump, indiceJump);
+    printf("Binary Search: %f segundos (índice %d).\n", tempoBinary, indiceBinary);
+    printf("\n");
+}
+
+int main() {
+    // Tamanhos diferentes de listas e testes com elemento no final
+    compararTempos(1000, 1000);
+    compararTempos(10000, 10000);
+    compararTempos(100000, 100000);
+    compararTempos(1000000, 1000000);
+
+    return 0;
+}
