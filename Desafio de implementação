@@ -1,0 +1,152 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+void imprimir_lista(int lista[], int n) {
+    for (int i = 0; i < n; i++) {
+        printf("%d ", lista[i]);
+    }
+    printf("\n");
+}
+
+// Função para Bubble Sort
+void bubble_sort(int lista[], int n) {
+    for (int i = 0; i < n-1; i++) {
+        for (int j = 0; j < n-i-1; j++) {
+            if (lista[j] > lista[j+1]) {
+                int temp = lista[j];
+                lista[j] = lista[j+1];
+                lista[j+1] = temp;
+            }
+        }
+    }
+}
+
+// Função para Selection Sort
+void selection_sort(int lista[], int n) {
+    for (int i = 0; i < n-1; i++) {
+        int minimo = i;
+        for (int j = i+1; j < n; j++) {
+            if (lista[j] < lista[minimo]) {
+                minimo = j;
+            }
+        }
+        int temp = lista[i];
+        lista[i] = lista[minimo];
+        lista[minimo] = temp;
+    }
+}
+
+// Função para Binary Search
+int binary_search(int lista[], int n, int alvo) {
+    int esquerda = 0, direita = n - 1;
+    while (esquerda <= direita) {
+        int meio = esquerda + (direita - esquerda) / 2;
+        if (lista[meio] == alvo) return meio;
+        else if (lista[meio] < alvo) esquerda = meio + 1;
+        else direita = meio - 1;
+    }
+    return -1;
+}
+
+// Função para Linear Search
+int linear_search(int lista[], int n, int alvo) {
+    for (int i = 0; i < n; i++) {
+        if (lista[i] == alvo) return i;
+    }
+    return -1;
+}
+
+void gerar_lista_aleatoria(int lista[], int n) {
+    for (int i = 0; i < n; i++) {
+        lista[i] = rand() % 1000;
+    }
+}
+
+int main() {
+    srand(time(NULL)); // Para números aleatórios
+
+    int n, escolha, alvo, resultado;
+    printf("Digite o tamanho da lista: ");
+    scanf("%d", &n);
+
+    int lista[n];
+    gerar_lista_aleatoria(lista, n);
+
+    printf("\nLista gerada aleatoriamente:\n");
+    imprimir_lista(lista, n);
+
+    printf("\nEscolha um algoritmo para ordenação ou busca:\n");
+    printf("1. Bubble Sort\n");
+    printf("2. Selection Sort\n");
+    printf("3. Binary Search\n");
+    printf("4. Linear Search\n");
+    printf("Digite sua escolha: ");
+    scanf("%d", &escolha);
+
+    clock_t inicio, fim;
+    double tempo_execucao;
+
+    switch (escolha) {
+        case 1:
+            // Bubble Sort
+            inicio = clock();
+            bubble_sort(lista, n);
+            fim = clock();
+            tempo_execucao = (double)(fim - inicio) / CLOCKS_PER_SEC;
+            printf("\nLista ordenada com Bubble Sort:\n");
+            imprimir_lista(lista, n);
+            printf("Tempo de execução: %.6f segundos\n", tempo_execucao);
+            break;
+
+        case 2:
+            // Selection Sort
+            inicio = clock();
+            selection_sort(lista, n);
+            fim = clock();
+            tempo_execucao = (double)(fim - inicio) / CLOCKS_PER_SEC;
+            printf("\nLista ordenada com Selection Sort:\n");
+            imprimir_lista(lista, n);
+            printf("Tempo de execução: %.6f segundos\n", tempo_execucao);
+            break;
+
+        case 3:
+            // Binary Search
+            printf("\nDigite o valor a ser buscado: ");
+            scanf("%d", &alvo);
+        
+            selection_sort(lista, n);
+            inicio = clock();
+            resultado = binary_search(lista, n, alvo);
+            fim = clock();
+            tempo_execucao = (double)(fim - inicio) / CLOCKS_PER_SEC;
+            if (resultado != -1) {
+                printf("Elemento %d encontrado na posição %d.\n", alvo, resultado);
+            } else {
+                printf("Elemento %d não encontrado.\n", alvo);
+            }
+            printf("Tempo de execução: %.6f segundos\n", tempo_execucao);
+            break;
+
+        case 4:
+            // Linear Search
+            printf("\nDigite o valor a ser buscado: ");
+            scanf("%d", &alvo);
+            inicio = clock();
+            resultado = linear_search(lista, n, alvo);
+            fim = clock();
+            tempo_execucao = (double)(fim - inicio) / CLOCKS_PER_SEC;
+            if (resultado != -1) {
+                printf("Elemento %d encontrado na posição %d.\n", alvo, resultado);
+            } else {
+                printf("Elemento %d não encontrado.\n", alvo);
+            }
+            printf("Tempo de execução: %.6f segundos\n", tempo_execucao);
+            break;
+
+        default:
+            printf("Opção inválida.\n");
+    }
+
+    return 0;
+}
