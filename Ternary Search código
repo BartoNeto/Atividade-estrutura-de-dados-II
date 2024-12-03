@@ -1,0 +1,59 @@
+#include <stdio.h>
+
+int ternarySearch(int arr[], int baixo, int alto, int alvo) {
+    if (alto >= baixo) {
+        
+        int mid1 = baixo + (alto - baixo) / 3;
+        int mid2 = alto - (alto - baixo) / 3;
+
+      
+        if (arr[mid1] == alvo) {
+            return mid1;
+        }
+        
+        if (arr[mid2] == alvo) {
+            return mid2;
+        }
+
+        
+        if (alvo < arr[mid1]) {
+            return ternarySearch(arr, baixo, mid1 - 1, alvo);
+        }
+        
+        else if (alvo > arr[mid2]) {
+            return ternarySearch(arr, mid2 + 1, alto, alvo);
+        }
+      
+        else {
+            return ternarySearch(arr, mid1 + 1, mid2 - 1, alvo);
+        }
+    }
+
+  
+    return -1;
+}
+
+// Função para imprimir a lista
+void imprimirLista(int arr[], int n) {
+    for (int i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+int main() {
+    // Exemplo de uso do Ternary Search
+    int arr[] = {1, 3, 5, 7, 9, 11, 13, 15, 17, 19};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    int alvo = 7;
+    int resultado = ternarySearch(arr, 0, n - 1, alvo);
+
+    if (resultado != -1) {
+        printf("Elemento encontrado no índice: %d\n", resultado);
+    } else {
+        printf("Elemento não encontrado!\n");
+    }
+
+    return 0;
+}
