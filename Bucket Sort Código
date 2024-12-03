@@ -1,0 +1,152 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void insertionSort(float arr[], int n) {
+    int i, j;
+    float key;
+    for (i = 1; i < n; i++) {
+        key = arr[i];
+        j = i - 1;
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j];
+            j = j - 1;
+        }
+        arr[j + 1] = key;
+    }
+}
+
+// Função para ordenar os elementos com Bucket Sort
+void bucketSort(float arr[], int n) {
+    // 1. Criar os baldes
+    if (n <= 0) return;
+    float **buckets = (float **)malloc(n * sizeof(float *));
+    int *bucketSizes = (int *)malloc(n * sizeof(int));
+
+    // Inicializando os baldes
+    for (int i = 0; i < n; i++) {
+        buckets[i] = (float *)malloc(n * sizeof(float)); // Suporta máximo de 'n' elementos
+        bucketSizes[i] = 0;
+    }
+
+    // 2. Colocar elementos nos baldes
+    for (int i = 0; i < n; i++) {
+        int index = arr[i] * n; // O índice de onde colocar o número no balde
+        buckets[index][bucketSizes[index]++] = arr[i];
+    }
+
+    // 3. Ordenar dentro de cada balde
+    for (int i = 0; i < n; i++) {
+        insertionSort(buckets[i], bucketSizes[i]);
+    }
+
+    // 4. Concatenar os baldes de volta para o array original
+    int index = 0;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < bucketSizes[i]; j++) {
+            arr[index++] = buckets[i][j];
+        }
+    }
+
+  
+    for (int i = 0; i < n; i++) {
+        free(buckets[i]);
+    }
+    free(buckets);
+    free(bucketSizes);
+}
+
+// Função para imprimir o array
+void imprimirArray(float arr[], int n) {
+    for (int i = 0; i < n; i++) {
+        printf("%.2f ", arr[i]);
+    }
+    printf("\n");
+}
+
+int main() {
+    float arr[] = {0.42, 0.32, 0.23, 0.52, 0.24, 0.5};  // Exemplo de lista
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    printf("Array original: \n");
+    imprimirArray(arr, n);
+
+    // Chama a função Bucket Sort
+    bucketSort(arr, n);
+
+    printf("Array ordenado: \n");
+    imprimirArray(arr, n);
+
+    return 0;
+}
+
+Adaptação do Bucket Sort para Ordenar Números Inteiros
+
+#include <stdio.h>
+#include <stdlib.h>
+
+// Função para ordenar os elementos com Bucket Sort para inteiros
+void bucketSortInteiros(int arr[], int n) {
+    // Encontrar o maior valor na lista
+    int max = arr[0];
+    for (int i = 1; i < n; i++) {
+        if (arr[i] > max) {
+            max = arr[i];
+        }
+    }
+
+    // Criar baldes
+    int bucketCount = max / 10 + 1;  // Dividido em baldes de tamanho 10
+    int **buckets = (int **)malloc(bucketCount * sizeof(int *));
+    int *bucketSizes = (int *)malloc(bucketCount * sizeof(int));
+
+    // Inicializar os baldes
+    for (int i = 0; i < bucketCount; i++) {
+        buckets[i] = (int *)malloc(n * sizeof(int)); // Suporta máximo de 'n' elementos
+        bucketSizes[i] = 0;
+    }
+
+    // Distribuir os elementos nos baldes
+    for (int i = 0; i < n; i++) {
+        int index = arr[i] / 10; // Coloca no balde com base no valor
+        buckets[index][bucketSizes[index]++] = arr[i];
+    }
+
+    // Ordenar dentro de cada balde (usando Insertion Sort)
+    for (int i = 0; i < bucketCount; i++) {
+        for (int j = 0; j < bucketSizes[i] - 1; j++) {
+            for (int k = 0; k < bucketSizes[i] - 1 - j; k++) {
+                if (buckets[i][k] > buckets[i][k + 1]) {
+                    int temp = buckets[i][k];
+                    buckets[i][k] = buckets[i][k + 1];
+                    buckets[i][k + 1] = temp;
+                }
+            }
+        }
+    }
+
+    // Concatenar os baldes de volta para o array original
+    int index = 0;
+    for (int i = 0; i < bucketCount; i++) {
+        for (int j = 0; j < bucketSizes[i]; j++) {
+            arr[index++] = buckets[i][j];
+        }
+    }
+
+
+    for (int i = 0; i < bucketCount; i++) {
+        free(buckets[i]);
+    }
+    free(buckets);
+    free(bucketSizes);
+}
+
+// Função para imprimir o array
+void imprimirArray(int arr[], int n) {
+    for (int i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+int main() {
+    int arr[] = {42, 32, 23, 52, 24, 50};
