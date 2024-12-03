@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <math.h> 
+
+// Função Jump Search
+int jumpSearch(int array[], int tamanho, int alvo) {
+    int salto = sqrt(tamanho); 
+    int prev = 0;
+
+    while (array[fmin(salto, tamanho) - 1] < alvo) {
+        prev = salto;
+        salto += sqrt(tamanho);
+        if (prev >= tamanho) {
+            return -1;
+        }
+    }
+
+    
+    for (int i = prev; i < fmin(salto, tamanho); i++) {
+        if (array[i] == alvo) {
+            return i;
+        }
+    }
+
+    return -1; 
+}
+
+// Função Binary Search
+int binarySearch(int array[], int tamanho, int alvo) {
+    int esquerda = 0, direita = tamanho - 1;
+
+    while (esquerda <= direita) {
+        int meio = esquerda + (direita - esquerda) / 2;
+
+        if (array[meio] == alvo) {
+            return meio;
+        }
+        if (array[meio] < alvo) {
+            esquerda = meio + 1;
+        } else {
+            direita = meio - 1;
+        }
+    }
+    return -1;
+}
+
+int main() {
+    // Teste com listas ordenadas
+    int array[] = {1, 3, 5, 7, 9, 11, 13, 15, 17, 19};
+    int tamanho =
