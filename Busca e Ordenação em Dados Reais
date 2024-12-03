@@ -1,0 +1,116 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define NUM_BALDES 10
+
+// Estrutura para armazenar os dados dos alunos
+typedef struct {
+    char nome[100];
+    int nota; // Nota do aluno
+} Aluno;
+int comparar(const void *a, const void *b) {
+    return ((Aluno*)a)->nota - ((Aluno*)b)->nota;
+}
+
+// Função para implementar o Bucket Sort
+void bucketSort(Aluno arr[], int n) {
+    // Encontrando o valor mínimo e máximo
+    int menorNota = arr[0].nota, maiorNota = arr[0].nota;
+    for (int i = 1; i < n; i++) {
+        if (arr[i].nota < menorNota)
+            menorNota = arr[i].nota;
+        if (arr[i].nota > maiorNota)
+            maiorNota = arr[i].nota;
+    }
+
+  
+    Aluno baldes[NUM_BALDES][n];
+    int contagem[NUM_BALDES] = {0};
+
+    
+    for (int i = 0; i < n; i++) {
+        int indiceBalde = (arr[i].nota - menorNota) * NUM_BALDES / (maiorNota - menorNota + 1);
+        baldes[indiceBalde][contagem[indiceBalde]++] = arr[i];
+    }
+
+    
+    for (int i = 0; i < NUM_BALDES; i++) {
+        qsort(baldes[i], contagem[i], sizeof(Aluno), comparar);
+    }
+
+  
+    int indice = 0;
+    for (int i = 0; i < NUM_BALDES; i++) {
+        for (int j = 0; j < contagem[i]; j++) {
+            arr[indice++] = baldes[i][j];
+        }
+    }
+}
+
+// Função para realizar a Interpolation Search
+int interpolacaoBusca(Aluno arr[], int n, int notaAlvo) {
+    int baixo = 0, alto = n - 1;
+
+    while (baixo <= alto && notaAlvo >= arr[baixo].nota && notaAlvo <= arr[alto].nota) {
+        
+        int pos = baixo + ((notaAlvo - arr[baixo].nota) * (alto - baixo)) / (arr[alto].nota - arr[baixo].nota);
+
+    
+        if (arr[pos].nota == notaAlvo) {
+            return pos;
+        }
+
+        
+        if (arr[pos].nota < notaAlvo) {
+            baixo = pos + 1;
+        }
+      
+        else {
+            alto = pos - 1;
+        }
+    }
+
+    return -1; 
+}
+
+int main() {
+    // Lista de alunos e suas notas
+    Aluno alunos[] = {
+        {"Ana", 92},
+        {"Carlos", 85},
+        {"Beatriz", 70},
+        {"Eduardo", 88},
+        {"Felipe", 95},
+        {"Luana", 60},
+        {"Ricardo", 78},
+        {"Paula", 89},
+        {"João", 73},
+        {"Maria", 90}
+    };
+
+    int n = sizeof(alunos) / sizeof(alunos[0]);
+
+    
+    bucketSort(alunos, n);
+
+    
+    printf("Alunos ordenados por nota:\n");
+    for (int i = 0; i < n; i++) {
+        printf("%s: %d\n", alunos[i].nome, alunos[i].nota);
+    }
+
+    
+    int notaAlvo = 88;
+
+    // Realizando a Interpolation Search
+    int resultado = interpolacaoBusca(alunos, n, notaAlvo);
+
+    if (resultado != -1) {
+        printf("\nAluno com a nota %d encontrado: %s\n", notaAlvo, alunos[resultado].nome);
+    } else {
+        printf("\nAluno com a nota %d não encontrado.\n", notaAlvo);
+    }
+
+    return 0;
+}
