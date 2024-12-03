@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <math.h> 
+#include <math.h>
 
 // Função Jump Search
 int jumpSearch(int array[], int tamanho, int alvo) {
@@ -10,11 +10,10 @@ int jumpSearch(int array[], int tamanho, int alvo) {
         prev = salto;
         salto += sqrt(tamanho);
         if (prev >= tamanho) {
-            return -1;
+            return -1; 
         }
     }
 
-    
     for (int i = prev; i < fmin(salto, tamanho); i++) {
         if (array[i] == alvo) {
             return i;
@@ -24,26 +23,20 @@ int jumpSearch(int array[], int tamanho, int alvo) {
     return -1; 
 }
 
-// Função Binary Search
-int binarySearch(int array[], int tamanho, int alvo) {
-    int esquerda = 0, direita = tamanho - 1;
-
-    while (esquerda <= direita) {
-        int meio = esquerda + (direita - esquerda) / 2;
-
-        if (array[meio] == alvo) {
-            return meio;
-        }
-        if (array[meio] < alvo) {
-            esquerda = meio + 1;
-        } else {
-            direita = meio - 1;
-        }
-    }
-    return -1;
-}
-
 int main() {
-    // Teste com listas ordenadas
+    // Teste com uma lista ordenada
     int array[] = {1, 3, 5, 7, 9, 11, 13, 15, 17, 19};
-    int tamanho =
+    int tamanho = sizeof(array) / sizeof(array[0]);
+    int alvo = 15;
+
+    // Executa o Jump Search
+    int indice = jumpSearch(array, tamanho, alvo);
+
+    if (indice != -1) {
+        printf("Elemento %d encontrado no índice %d.\n", alvo, indice);
+    } else {
+        printf("Elemento %d não encontrado.\n", alvo);
+    }
+
+    return 0;
+}
