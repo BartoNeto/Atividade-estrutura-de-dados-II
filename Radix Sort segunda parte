@@ -1,0 +1,7 @@
+Como o Algoritmo Lida com Bases Diferentes
+
+O Radix Sort pode lidar com diferentes bases ao ajustar a função de ordenação para trabalhar com a base desejada. A base 10 é a mais comum para números inteiros decimais, mas também pode ser ajustado para base 2 (binária) ou outras bases.
+
+Base 10: Para números decimais (como no exemplo acima), o Radix Sort trabalha com a base 10, o que significa que ele examina cada dígito do número em relação à sua posição em potências de 10 (unidades, dezenas, centenas, etc.).
+
+Base 2 (Binária): Para números binários (ou números em base 2), o algoritmo pode ser ajustado para verificar os dígitos binários (bits) a partir do bit menos significativo (LSB) até o mais significativo (MSB). O processo seria análogo ao Radix Sort com base 10, mas agora lidando com os bits.
