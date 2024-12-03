@@ -1,0 +1,5 @@
+Analisando o Desempenho do Quick Sort
+
+Lista Quase Ordenada: O Quick Sort pode se comportar muito mal quando a lista está quase ordenada, especialmente se o pivô for escolhido de maneira inadequada (por exemplo, sempre escolher o primeiro ou o último elemento). Isso pode levar a uma divisão desigual das sublistas, resultando em um tempo de execução de .
+
+Lista Completamente Desordenada: Em listas completamente desordenadas, o Quick Sort geralmente se comporta de forma mais eficiente, com complexidade de  na maioria dos casos, mas isso pode ser afetado pela escolha do pivô. A escolha do pivô vai determinar se a lista será dividida de maneira equilibrada ou não.
