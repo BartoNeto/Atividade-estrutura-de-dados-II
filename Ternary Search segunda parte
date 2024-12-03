@@ -1,0 +1,15 @@
+Comparação de Desempenho: Ternary Search vs Binary Search
+
+Ternary Search e Binary Search têm complexidade de tempo O(log n), mas Ternary Search faz mais comparações por cada divisão (3 comparações em vez de 1). Portanto, embora ambos tenham a mesma complexidade assintótica, o Binary Search tende a ser mais rápido em termos práticos, pois ele realiza menos comparações por divisão.
+
+Em termos de eficiência de tempo real, Binary Search geralmente é mais eficiente devido ao menor número de comparações por nível de recursão.
+
+
+Situações em que o Ternary Search pode ser mais eficiente:
+
+Ternary Search pode ser mais eficiente se a operação de comparação for muito cara (por exemplo, se a comparação envolver operações complexas ou dispendiosas) e se a lista for muito grande, já que o número de recursões pode ser reduzido ao dividir em três partes, embora o número total de comparações seja maior.
+
+Ternary Search pode ser útil em situações onde o tempo de execução de cada comparação é muito significativo comparado ao custo da divisão da lista.
+
+
+No entanto, em termos de tempo puro de execução, Binary Search será mais eficiente devido ao menor número de comparações realizadas.
