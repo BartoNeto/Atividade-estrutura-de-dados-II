@@ -1,0 +1,21 @@
+Por que a lista precisa estar ordenada?
+
+O Binary Search depende da ordem dos elementos para decidir qual metade da lista ignorar.
+Sem uma lista ordenada, não é possível garantir que os elementos em uma metade são todos menores ou maiores que o elemento-alvo.
+
+Por exemplo:
+
+Lista ordenada: [1, 3, 5, 7, 9]
+
+Procurando o número 7:
+
+1. Primeiro meio: 5 (índice 2). Como 7 > 5, busca continua na metade direita.
+
+
+2. Novo meio: 7 (índice 3). Elemento encontrado.
+
+Lista não ordenada: [9, 3, 7, 1, 5]
+
+1. Primeiro meio: 7 (índice 2). Embora seja o número procurado, a ordem aleatória impede a garantia de que os valores restantes sejam irrelevantes.
+
+Isso tornaria o algoritmo ineficiente, funcionando como uma busca linear.
