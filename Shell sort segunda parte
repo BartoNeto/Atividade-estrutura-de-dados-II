@@ -1,0 +1,7 @@
+Como a Escolha da Sequência de Intervalos Afeta a Eficiência
+
+Sequência de Shell: A sequência tradicional começa com um grande intervalo e diminui de forma linear. Embora seja simples de implementar, não é a mais eficiente para listas grandes, já que o número de trocas diminui de forma lenta à medida que os intervalos diminuem.
+
+Sequência de Knuth: A sequência de Knuth oferece melhor desempenho em comparação com a sequência de Shell, pois utiliza intervalos mais eficientes. Ela tende a fazer menos comparações e trocas do que a sequência de Shell, mas ainda assim pode não ser tão eficiente quanto outras opções.
+
+Sequência de Hibbard: A sequência de Hibbard é uma das mais eficientes, especialmente para listas grandes. Ela permite que o algoritmo Shell Sort faça um número menor de comparações e trocas, o que resulta em um tempo de execução significativamente mais rápido em listas maiores.
