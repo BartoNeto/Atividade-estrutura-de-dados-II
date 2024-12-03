@@ -1,0 +1,111 @@
+Definição de Ordenação Estável e Instável
+
+Ordenação Estável: Um algoritmo de ordenação é considerado estável se, ao ordenar os elementos, ele mantém a ordem relativa de elementos com chaves iguais. Em outras palavras, se dois elementos são iguais em relação à chave de ordenação, eles permanecerão na mesma ordem relativa que estavam na lista original.
+
+Ordenação Instável: Um algoritmo de ordenação é instável se ele não garante que a ordem relativa de elementos com chaves iguais seja preservada após a ordenação.
+
+
+Exemplos de Algoritmos de Ordenação
+
+Algoritmos Estáveis:
+
+1. Bubble Sort:
+
+O Bubble Sort é estável porque, quando dois elementos são iguais, ele apenas os compara e não troca de posição, mantendo a ordem relativa dos elementos iguais.
+
+
+
+2. Merge Sort:
+
+O Merge Sort é estável porque, quando dois elementos com a mesma chave são encontrados, o algoritmo sempre preserva a ordem relativa deles.
+
+
+
+3. Insertion Sort:
+
+O Insertion Sort também é estável porque ele insere os elementos na posição correta sem trocar a ordem de elementos iguais.
+
+
+
+4. Tim Sort:
+
+Uma combinação de Merge Sort e Insertion Sort. É estável por natureza.
+
+
+
+
+Algoritmos Instáveis:
+
+1. Quick Sort:
+
+O Quick Sort é instável porque a troca de elementos durante o processo de particionamento pode alterar a ordem relativa de elementos com a mesma chave.
+
+
+
+2. Selection Sort:
+
+O Selection Sort é instável porque ele pode trocar elementos iguais de posições durante as trocas.
+
+
+
+
+Demonstração com Exemplos
+
+Vamos usar um exemplo simples para ilustrar a estabilidade na ordenação. Considere a seguinte lista de tuplas, onde o primeiro valor é a chave e o segundo é um identificador para o elemento original.
+
+Lista Original:
+
+[(5, 'a'), (3, 'b'), (5, 'c'), (1, 'd')]
+
+A chave de ordenação é o primeiro valor da tupla.
+
+
+Algoritmos Estáveis:
+
+1. Bubble Sort:
+
+Passos: O Bubble Sort irá comparar e trocar elementos adjacentes. Quando ele encontrar os dois elementos com valor 5 (i.e., (5, 'a') e (5, 'c')), ele não fará nenhuma troca entre eles porque a ordem relativa será preservada.
+
+
+Resultado:
+
+[(1, 'd'), (3, 'b'), (5, 'a'), (5, 'c')]
+
+A ordem dos elementos com a chave 5 ('a' e 'c') foi preservada.
+
+
+2. Merge Sort:
+
+Durante a fusão das sublistas, quando dois elementos iguais são encontrados, o Merge Sort garante que o elemento da lista esquerda (i.e., (5, 'a')) será colocado antes do da lista direita (i.e., (5, 'c')), mantendo a ordem relativa.
+
+
+Resultado:
+
+[(1, 'd'), (3, 'b'), (5, 'a'), (5, 'c')]
+
+
+
+Algoritmos Instáveis:
+
+1. Quick Sort:
+
+O Quick Sort pode realizar trocas de elementos iguais durante o processo de particionamento. Por exemplo, se o pivô escolhido for 5, o algoritmo pode trocar (5, 'a') e (5, 'c') durante a divisão das sublistas, alterando a ordem original deles.
+
+
+Resultado:
+
+[(1, 'd'), (3, 'b'), (5, 'c'), (5, 'a')]
+
+Como se pode ver, a ordem dos elementos com a chave 5 foi alterada.
+
+
+2. Selection Sort:
+
+O Selection Sort também pode trocar os elementos iguais durante o processo de busca do menor valor em cada iteração. Isso pode mudar a ordem relativa de elementos com a mesma chave.
+
+
+Resultado:
+
+[(1, 'd'), (3, 'b'), (5, 'c'), (5, 'a')]
+
+Aqui, os elementos com chave 5 também tiveram alterada.
