@@ -1,0 +1,99 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+// Função Binary Search
+int binarySearch(int arr[], int baixo, int alto, int alvo) {
+    while (baixo <= alto) {
+        int meio = baixo + (alto - baixo) / 2;
+        if (arr[meio] == alvo) {
+            return meio;
+        } else if (arr[meio] < alvo) {
+            baixo = meio + 1;
+        } else {
+            alto = meio - 1;
+        }
+    }
+    return -1;
+}
+
+// Função Interpolation Search
+int interpolationSearch(int arr[], int baixo, int alto, int alvo) {
+    while (baixo <= alto && arr[baixo] <= alvo && arr[alto] >= alvo) {
+        int pos = baixo + ((double)(alto - baixo) / (arr[alto] - arr[baixo])) * (alvo - arr[baixo]);
+        if (arr[pos] == alvo) {
+            return pos;
+        } else if (arr[pos] < alvo) {
+            baixo = pos + 1;
+        } else {
+            alto = pos - 1;
+        }
+    }
+    return -1;
+}
+
+// Função Jump Search
+int jumpSearch(int arr[], int n, int alvo) {
+    int passo = (int)sqrt(n);
+    int prev = 0;
+    while (arr[passo - 1] < alvo && passo < n) {
+        prev = passo;
+        passo += (int)sqrt(n);
+        if (passo > n) {
+            passo = n;
+        }
+    }
+    for (int i = prev; i < passo; i++) {
+        if (arr[i] == alvo) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+// Função Exponential Search
+int exponentialSearch(int arr[], int n, int alvo) {
+    if (arr[0] == alvo) {
+        return 0;
+    }
+    int i = 1;
+    while (i < n && arr[i] <= alvo) {
+        i = i * 2;
+    }
+    return binarySearch(arr, i / 2, (i < n ? i : n - 1), alvo);
+}
+
+// Função para medir o tempo de execução de um algoritmo
+double medirTempo(int (*algoritmo)(int[], int, int, int), int arr[], int n, int alvo) {
+    clock_t inicio = clock();
+    algoritmo(arr, 0, n - 1, alvo);
+    clock_t fim = clock();
+    return ((double)(fim - inicio)) / CLOCKS_PER_SEC * 1000; 
+}
+
+// Função principal para gerar a tabela comparativa
+int main() {
+    // Gerar lista de exemplo (ordenada)
+    int n = 10000; // Tamanho da lista
+    int *arr = (int*)malloc(n * sizeof(int));
+    for (int i = 0; i < n; i++) {
+        arr[i] = i * 2; 
+    }
+
+    int alvo = 5000; 
+
+    printf("Tamanho da Lista: %d\n", n);
+    printf("Algoritmo             | Tempo de Execução (ms)\n");
+    printf("--------------------------------------------\n");
+
+    // Medindo os tempos de execução
+    printf("Binary Search         | %.5f ms\n", medirTempo(binarySearch, arr, n, alvo));
+    printf("Interpolation Search   | %.5f ms\n", medirTempo(interpolationSearch, arr, n, alvo));
+    printf("Jump Search           | %.5f ms\n", medirTempo(jumpSearch, arr, n, alvo));
+    printf("Exponential Search    | %.5f ms\n", medirTempo(exponentialSearch, arr, n, alvo));
+
+  
+    free(arr);
+
+    return 0;
+}
