@@ -1,0 +1,33 @@
+#include <stdio.h>
+
+int buscaBinaria(int array[], int tamanho, int alvo) {
+    int esquerda = 0, direita = tamanho - 1;
+
+    while (esquerda <= direita) {
+        int meio = esquerda + (direita - esquerda) / 2; // Calcula o meio
+        if (array[meio] == alvo) {
+            return meio; // Elemento encontrado
+        }
+        if (array[meio] < alvo) {
+            esquerda = meio + 1; // Ignora a metade esquerda
+        } else {
+            direita = meio - 1; // Ignora a metade direita
+        }
+    }
+    return -1; // Elemento não encontrado
+}
+
+int main() {
+    int array[] = {2, 4, 6, 8, 10, 12, 14}; // Lista ordenada
+    int tamanho = sizeof(array) / sizeof(array[0]);
+    int alvo = 10;
+
+    int indice = buscaBinaria(array, tamanho, alvo);
+    if (indice != -1) {
+        printf("Elemento %d encontrado no índice %d.\n", alvo, indice);
+    } else {
+        printf("Elemento %d não encontrado.\n", alvo);
+    }
+
+    return 0;
+}
